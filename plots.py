@@ -55,6 +55,7 @@ def logistic_regression_plot(features):
     return None
 
 # ---------------
+
 # Box & whisker plot routine
 def makeBoxplot(features):
     fig = plt.figure(figsize = (8, 12))
@@ -71,5 +72,84 @@ def makeBoxplot(features):
         ax.grid(False)
     
     fig.tight_layout()
-    plt.show()
+    # plt.show()
+    plt.savefig('coderep_boxplot.png')
 
+# ---------------
+
+def createHeatmap():
+    sns.set_theme(style ='white')
+    #Generate a mask for the upper triangular matrix
+    mask = np.triu(input_data.corr(), k = 0)
+
+    fig = plt.figure(figsize = (18, 18))
+    ax = fig.add_subplot()
+
+    # Generate a custom diverging palette of colours
+    cmap = sns.diverging_palette(230, 20, as_cmap = True)
+
+    sns.heatmap(data = input_data.corr(), 
+                annot = True, 
+                linewidths = 0.5, 
+                fmt = '.1f',
+                ax = ax, 
+                mask = mask,
+                cmap = cmap)
+
+    plt.title('A correlation heatmap of the features', fontsize = 20)
+    # plt.show()
+    plt.savefig('coderep_heatmap.png')
+
+# ---------------
+
+#Plot histogram
+def makeHistogram(features):
+    for feature in features:
+        if not type(feature) is str:
+            raise TypeError('Only strings are permitted')
+            
+    fig = plt.figure(figsize = (10, 8))
+    for i, feature in enumerate(features):
+        ax = fig.add_subplot(1, 3, i + 1)  
+        sns.histplot(Malignant[feature], 
+                   bins = bins, 
+                   color = 'red', 
+                   label = 'Malignant',
+                   kde = True)
+        sns.histplot(Benign[feature], 
+                   bins = bins, 
+                   color = 'green', 
+                   label = 'Benign',
+                   kde = True)
+        plt.title(str(' Distribution of  ') + str(feature.replace('_', ' ').capitalize()))
+        plt.xlabel(str(feature.replace('_', ' ').capitalize()))
+        plt.ylabel('Density function')
+        plt.legend(loc = 'upper right')
+        ax.grid(False)
+    
+    plt.tight_layout()
+    # plt.show()
+    plt.savefig('coderep_histogram.png')
+
+# ---------------
+
+def createCountplot():
+    fig = plt.figure(figsize = (8, 6))
+    ax = fig.add_subplot()
+
+    sns.set_theme(style = 'whitegrid')
+
+    sns.countplot(data = data_df, 
+              x = data_df.diagnosis, 
+              label = 'Count',
+              lw = 4,
+              ec = 'black').set(title = 'A count of benign and malignant tumours',
+                                  xlabel = 'Diagnosis',
+                                  ylabel = 'Count')
+
+    ax.set_xticklabels(xtickmarks)
+    # plt.show()
+    plt.savefig('coderep_countplot.png')
+
+# ---------------
+    
