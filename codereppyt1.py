@@ -9,7 +9,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, accuracy_score, roc_curve, auc
 from scipy import stats # Hypthesis testing 
 import seaborn as sns
-
+# add in special sauce to use our python files containing useful functions
+import plots as pe
+import models as mods
 # Read and characterise data
 data_df = pd.read_csv("dataset/data.csv")
 
@@ -27,7 +29,7 @@ xtickmarks = ['B', 'M']
 print(f'Number of Malignant tumours: {M}')
 print(f'Number of Benign tumours   : {B}')
 
-createCountplot()
+pe.createCountplot()
 
 variables_to_omit = ['id', 'diagnosis']
 input_data = data_df.drop(variables_to_omit, axis = 1)
@@ -43,25 +45,24 @@ worst_mean_se = ['area_worst', 'fractal_dimension_mean', 'radius_se']
 
 bins = 'fd'
 
-makeHistogram(worst_mean_se)
-
+pe.makeHistogram(worst_mean_se)
 
 # **Heatmaps** provide an informative way to depict two-dimensional data of the kind we have before us. A *heatmap* is an image in which the colour of each pixel is determined by the corresponding value in the array of data. 
 
-createHeatmap()
+pe.createHeatmap()
 
 # More plots
 
 # Create box and whiskers plot for texture mean by diagnosis of tumour
 Diagnosis = 'diagnosis'
 
-makeBoxplot(worst_mean_se)
+pe.makeBoxplot(worst_mean_se)
 
 # Logistic regression plots
 
 # Some more box and whiskers plots
 
-logistic_regression_plot(worst_mean_se)
+pe.logistic_regression_plot(worst_mean_se)
 
 # Hypothesis testing using Student's t-test.
 
@@ -122,7 +123,7 @@ X_train = rs_object.fit_transform(X_train)
 X_test = rs_object.transform(X_test)
 
 #Obtain the training results
-model = createModel(X_train, y_train)
+model = mods.createModel(X_train, y_train)
 
 # Create Confusion matrix
 
@@ -138,7 +139,7 @@ print(f'Accuracy on the test data: {(TP + TN) / (TP + TN + FN + FP): .2f}')
 print()# Print a new line
 
 # modify call to pass model.classes as parameter
-displayConfusionMatrix()
+pe.displayConfusionMatrix()
 
 # Classification report is used in machine learning to compute accuracy of a classification model from the values of the confusion matrix. In the classification report, precision is a measure of positive predictions.
 
@@ -160,4 +161,4 @@ fpr, tpr, _ = roc_curve(y_test, y_pred_prob)
 print(f'The AUC score for the logistic regression model is: {auc(fpr, tpr):.4f}')
 
 # modify called function to have params of true and false positive rate
-createROC()
+pe.createROC()
