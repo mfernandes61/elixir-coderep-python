@@ -1,3 +1,7 @@
+import numpy as np # linear algebra
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 # create receiver operating characteristic(ROC) curve
 # i.e. how well is our model performing?
 def createROC():

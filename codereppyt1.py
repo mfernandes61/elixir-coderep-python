@@ -13,7 +13,7 @@ import seaborn as sns
 import plots as pe
 import models as mods
 # Read and characterise data
-data_df = pd.read_csv("dataset/data.csv")
+data_df = pd.read_csv("datasets/data.csv")
 
 data_df.head().T
 #data_df.info()
