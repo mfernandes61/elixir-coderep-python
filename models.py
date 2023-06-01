@@ -1,3 +1,5 @@
+from sklearn.linear_model import LogisticRegression
+
 # Define a function which trains a logistic model
 def createModel(X_train, y_train):
     

@@ -1,6 +1,7 @@
 import numpy as np # linear algebra
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 # create receiver operating characteristic(ROC) curve
 # i.e. how well is our model performing?
@@ -23,7 +24,7 @@ def createROC():
 # -----------------------    
 
 # Confusion matrix plot
-def displayConfusionMatrix():
+def displayConfusionMatrix(cm, model):
     disp = ConfusionMatrixDisplay(confusion_matrix = cm,
                                   display_labels = model.classes_)
     
@@ -36,7 +37,7 @@ def displayConfusionMatrix():
 # -----------------------    
 
 # Logistic plot
-def logistic_regression_plot(features):
+def logistic_regression_plot(features,data_df, Diagnosis):
     fig = plt.figure(figsize = (11, 5))
     for i, feature in enumerate(features):
         ax = fig.add_subplot(1, 3, i + 1)
@@ -61,7 +62,7 @@ def logistic_regression_plot(features):
 # ---------------
 
 # Box & whisker plot routine
-def makeBoxplot(features):
+def makeBoxplot(features,data_df, Diagnosis, xtickmarks):
     fig = plt.figure(figsize = (8, 12))
     for i, feature in enumerate(features):
         ax = fig.add_subplot(2, 2, i + 1)
@@ -81,7 +82,7 @@ def makeBoxplot(features):
 
 # ---------------
 
-def createHeatmap():
+def createHeatmap(input_data):
     sns.set_theme(style ='white')
     #Generate a mask for the upper triangular matrix
     mask = np.triu(input_data.corr(), k = 0)
@@ -107,7 +108,7 @@ def createHeatmap():
 # ---------------
 
 #Plot histogram
-def makeHistogram(features):
+def makeHistogram(features,Malignant,Benign,bins):
     for feature in features:
         if not type(feature) is str:
             raise TypeError('Only strings are permitted')
@@ -137,7 +138,7 @@ def makeHistogram(features):
 
 # ---------------
 
-def createCountplot():
+def createCountplot(data_df, xtickmarks):
     fig = plt.figure(figsize = (8, 6))
     ax = fig.add_subplot()
 

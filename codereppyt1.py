@@ -29,7 +29,7 @@ xtickmarks = ['B', 'M']
 print(f'Number of Malignant tumours: {M}')
 print(f'Number of Benign tumours   : {B}')
 
-pe.createCountplot()
+pe.createCountplot(data_df, xtickmarks)
 
 variables_to_omit = ['id', 'diagnosis']
 input_data = data_df.drop(variables_to_omit, axis = 1)
@@ -45,24 +45,24 @@ worst_mean_se = ['area_worst', 'fractal_dimension_mean', 'radius_se']
 
 bins = 'fd'
 
-pe.makeHistogram(worst_mean_se)
+pe.makeHistogram(worst_mean_se, Malignant,Benign,  bins)
 
 # **Heatmaps** provide an informative way to depict two-dimensional data of the kind we have before us. A *heatmap* is an image in which the colour of each pixel is determined by the corresponding value in the array of data. 
 
-pe.createHeatmap()
+pe.createHeatmap(input_data)
 
 # More plots
 
 # Create box and whiskers plot for texture mean by diagnosis of tumour
 Diagnosis = 'diagnosis'
 
-pe.makeBoxplot(worst_mean_se)
+pe.makeBoxplot(worst_mean_se, data_df, Diagnosis, xtickmarks)
 
 # Logistic regression plots
 
 # Some more box and whiskers plots
 
-pe.logistic_regression_plot(worst_mean_se)
+pe.logistic_regression_plot(worst_mean_se, data_df, Diagnosis)
 
 # Hypothesis testing using Student's t-test.
 
@@ -139,7 +139,7 @@ print(f'Accuracy on the test data: {(TP + TN) / (TP + TN + FN + FP): .2f}')
 print()# Print a new line
 
 # modify call to pass model.classes as parameter
-pe.displayConfusionMatrix()
+pe.displayConfusionMatrix(cm, model)
 
 # Classification report is used in machine learning to compute accuracy of a classification model from the values of the confusion matrix. In the classification report, precision is a measure of positive predictions.
 
