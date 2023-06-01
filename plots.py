@@ -1,11 +1,13 @@
 import numpy as np # linear algebra
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay,auc
+# from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, accuracy_score, roc_curve, 
+auc
 
 # create receiver operating characteristic(ROC) curve
 # i.e. how well is our model performing?
-def createROC():
+def createROC(fpr,tpr):
     fig = plt.figure()
     ax = fig.add_subplot()
 

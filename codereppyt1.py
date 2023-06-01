@@ -161,4 +161,4 @@ fpr, tpr, _ = roc_curve(y_test, y_pred_prob)
 print(f'The AUC score for the logistic regression model is: {auc(fpr, tpr):.4f}')
 
 # modify called function to have params of true and false positive rate
-pe.createROC()
+pe.createROC(fpr,tpr)
