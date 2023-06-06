@@ -150,7 +150,7 @@ TP = cm[1][1]
 FN = cm[1][0]
 FP = cm[0][1]
  
-outp = cm + '\n'
+outp = str(cm) + '\n'
 outp = outp + 'Accuracy on the test data: ' + str((TP + TN) / (TP + TN + FN + FP)) + '\n\n'
 hg.html_para(outp)
 
