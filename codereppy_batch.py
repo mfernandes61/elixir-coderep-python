@@ -30,8 +30,8 @@ data_df = data_df.dropna(axis = 1)
 B, M = data_df.diagnosis.value_counts()
 xtickmarks = ['B', 'M']
 
-outp = 'Number of Malignant tumours: ' + M +'\n'
-outp = outp + 'Number of Benign tumours   : ' + B + '\n'
+outp = 'Number of Malignant tumours: ' + str(M) +'\n'
+outp = outp + 'Number of Benign tumours   : ' + str(B) + '\n'
 
 hg.html_para(outp)
 pe.createCountplot(data_df, xtickmarks)
@@ -42,8 +42,8 @@ variables_to_omit = ['id', 'diagnosis']
 input_data = data_df.drop(variables_to_omit, axis = 1)
 r, c = input_data.shape
 
-outp = 'Sample size                    : ' + r + '\n'
-outp = outp + 'Number of independent variables: ' + c + '\n'
+outp = 'Sample size                    : ' + str(r) + '\n'
+outp = outp + 'Number of independent variables: ' + str(c) + '\n'
 hg.html_para(outp)
 
 # Histograms
@@ -84,8 +84,8 @@ hypothesis_test_data = pd.DataFrame(data = data_df[['area_worst', 'diagnosis']])
 hypothesis_test_data = hypothesis_test_data.set_index(Diagnosis)
 t, p = stats.ttest_ind(hypothesis_test_data.loc[0], hypothesis_test_data.loc[1])
 
-outp = '\nThe t-value: ' + t + '\n'
-outp = outp + 'The p-value: ' + p + '\n'
+outp = '\nThe t-value: ' + str(t) + '\n'
+outp = outp + 'The p-value: ' + str(p) + '\n'
 hg.html_para(outp)
       
 class Hypothesis_T_Test(object):
@@ -119,7 +119,7 @@ features_to_omit = [column for column in upper_triangular.columns if any(upper_t
 # Remove features to omit 
 correlation_data = input_data.drop(input_data[features_to_omit], axis = 1)
 correlation_data.columns
-outp = correlation_data.columns +  '\n'
+outp = str(correlation_data.columns) +  '\n'
 hg.html_para(outp)
 
 # Machine learning
@@ -151,7 +151,7 @@ FN = cm[1][0]
 FP = cm[0][1]
  
 outp = cm + '\n'
-outp = outp + 'Accuracy on the test data: ' + (TP + TN) / (TP + TN + FN + FP) + '\n\n'
+outp = outp + 'Accuracy on the test data: ' + str((TP + TN) / (TP + TN + FN + FP)) + '\n\n'
 hg.html_para(outp)
 
 # modify call to pass model.classes as parameter
@@ -163,9 +163,9 @@ hg.html_image("Confusion Matrix", "coderep_ConfMat.png")
 outp = 'Logistic regression model \n'
 #Check precision, recall, f1-score
 outp = outp + 'Classification report \n'
-outp = outp + classification_report(y_test, model.predict(X_test))
+outp = outp + str(classification_report(y_test, model.predict(X_test))) + '\n'
 #Another way to get the models accuracy on the test data
-outp = outp + '\nAccuracy score ' + accuracy_score(y_test, model.predict(X_test)) + '\n\n'
+outp = outp + '\nAccuracy score ' + str(accuracy_score(y_test, model.predict(X_test))) + '\n\n'
 hg.html_para(outp)
 
 # ROC Curve
@@ -175,7 +175,7 @@ y_pred_prob = model.predict_proba(X_test)[:,1]
 # Generate ROC curve values and capture only fpr, and tpr, but not thresholds
 fpr, tpr, _ = roc_curve(y_test, y_pred_prob)
 
-outp = 'The AUC score for the logistic regression model is: ' + auc(fpr, tpr) + '\n'
+outp = 'The AUC score for the logistic regression model is: ' + str(auc(fpr, tpr)) + '\n'
 hg.html_para(outp)
 
 # modify called function to have params of true and false positive rate
