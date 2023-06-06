@@ -36,7 +36,7 @@ outp = outp + 'Number of Benign tumours   : ' + str(B) + '\n'
 hg.html_para(outp)
 pe.createCountplot(data_df, xtickmarks)
 
-hg.html_image("Countplot", "coderep_countplot.png")
+hg.html_img("Countplot", "coderep_countplot.png")
 
 variables_to_omit = ['id', 'diagnosis']
 input_data = data_df.drop(variables_to_omit, axis = 1)
@@ -55,12 +55,12 @@ worst_mean_se = ['area_worst', 'fractal_dimension_mean', 'radius_se']
 bins = 'fd'
 
 pe.makeHistogram(worst_mean_se, Malignant,Benign,  bins)
-hg.html_image("Histogram", "coderep_histogram.png")
+hg.html_img("Histogram", "coderep_histogram.png")
 
 # **Heatmaps** provide an informative way to depict two-dimensional data of the kind we have before us. A *heatmap* is an image in which the colour of each pixel is determined by the corresponding value in the array of data. 
 
 pe.createHeatmap(input_data)
-hg.html_image("Heatmap", "coderep_heatmap.png")
+hg.html_img("Heatmap", "coderep_heatmap.png")
 
 # More plots
 
@@ -68,14 +68,14 @@ hg.html_image("Heatmap", "coderep_heatmap.png")
 Diagnosis = 'diagnosis'
 
 pe.makeBoxplot(worst_mean_se, data_df, Diagnosis, xtickmarks)
-hg.html_image("Boxplot", "coderep_boxplot.png")
+hg.html_img("Boxplot", "coderep_boxplot.png")
 
 # Logistic regression plots
 
 # Some more box and whiskers plots
 
 pe.logistic_regression_plot(worst_mean_se, data_df, Diagnosis)
-hg.html_image("Logistic regression plot", "coderep_log_plot.png")
+hg.html_img("Logistic regression plot", "coderep_log_plot.png")
 
 # Hypothesis testing using Student's t-test.
 
@@ -156,7 +156,7 @@ hg.html_para(outp)
 
 # modify call to pass model.classes as parameter
 pe.displayConfusionMatrix(cm, model)
-hg.html_image("Confusion Matrix", "coderep_ConfMat.png")
+hg.html_img("Confusion Matrix", "coderep_ConfMat.png")
 
 # Classification report is used in machine learning to compute accuracy of a classification model from the values of the confusion matrix. In the classification report, precision is a measure of positive predictions.
 
@@ -180,7 +180,7 @@ hg.html_para(outp)
 
 # modify called function to have params of true and false positive rate
 pe.createROC(fpr,tpr)
-hg.html_image("ROC curve", "coderep_ROC.png")
+hg.html_img("ROC curve", "coderep_ROC.png")
 
 # Finish up the web page
 hg.end_html()
